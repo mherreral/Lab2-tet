@@ -13,8 +13,8 @@ services:
       WORDPRESS_DB_NAME: exampledb
     volumes:
       - wordpress:/var/www/html
-      - ./default-ssl.conf:/etc/apache2/sites-available/default-ssl.conf:ro
-      - ./ssl:/etc/ssl
+      - ./tet-lab2.tk.conf:/etc/apache2/sites-available/tet-lab2.tk.conf
+      - /etc/letsencrypt/live/tet-lab2.tk:/etc/letsencrypt/live/tet-lab2.tk
 
   db:
     image: mysql:5.7
