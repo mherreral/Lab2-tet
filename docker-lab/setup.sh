@@ -49,13 +49,9 @@ cd dk_wordpress
 sudo docker-compose up -d
 
 ### SSL generation
-# Go to cerbot page at https://certbot.eff.org/instructions and select Apache with Ubuntu 20, then follow instructions
+# Install certbot
+sudo apt install python3-certbot-apache apache2
 
-# Get a prompt inside container
-sudo docker exec -it c739cb0fb6ae /bin/bash
+# Run certbot command 
+certbot certonly   --manual   --preferred-challenges dns   -d tet-lab2.tk -d "*.tet-lab2.tk" -i apache
 
-# Update system
-apt update
-
-# Install snap
-apt install snapd
