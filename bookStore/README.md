@@ -6,6 +6,7 @@ Deploy and containerize webapp consisting of backend and frontend.
 * [Introduction](#intro)
 * [Virtual machine configuration](#config)
 * [Front configuration](#front)
+* [Back configuration](#back)
 * [Generating certs](#ssl)
 * [Docker compose](#dc)
 
@@ -40,14 +41,15 @@ $ sudo hostnamectl set-hostname back
 ```
 
 ```
-$ sudo rebbot
+$ sudo reboot
 ```
 
 ### Front config <a name="front"></a>
 - Update server
   
 ```
-$ sudo su; apt update; apt upgrade -y
+$ sudo su
+$ apt update; apt upgrade -y
 ```
 
 - Install nginx
@@ -59,4 +61,44 @@ $ apt install nginx -y
 - Edit nginx server conf in file vim */etc/nginx/sites-available/default*, add *root /usr/share/nginx/html/bookstore*
 <p align="center"><img src="https://drive.google.com/uc?export=view&id=1aLQHA_kq8vErndq9vo_ksK0kbaEWB8ev"></p>
 
-- 
+- Then execute the following
+<p align="center"><img src="https://drive.google.com/uc?export=view&id=131wX0QR3fdt1s0KKzyrIqiBXMoaE9qa9"></p>
+
+- Then install nodejs
+
+```
+$ apt install nodejs npm
+```
+
+- Move to frontend folder and
+
+```
+$ nmp install; npm run build
+```
+
+- Move build folder to */usr/share/nginx/html/bookstore*
+
+### Back config <a name="back"></a>
+- Update server
+  
+```
+$ sudo su
+$ apt update; apt upgrade -y
+```
+
+- Then install nodejs
+
+```
+$ apt install nodejs npm
+```
+
+- Clone repo
+
+```
+$ git clone https://github.com/mherreral/Lab2-tet.git
+```
+
+- go to backend folder
+
+
+
