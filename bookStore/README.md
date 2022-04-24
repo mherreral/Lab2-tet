@@ -8,7 +8,7 @@ Deploy and containerize webapp consisting of backend and frontend.
 * [Front configuration](#front)
 * [Back configuration](#back)
 * [Generating certs](#ssl)
-* [Docker compose](#dc)
+* [Docker](#dc)
 
 ### Database configuration <a name="db"></a>
 - Go to https://www.mongodb.com/cloud/atlas and create an account
@@ -41,7 +41,7 @@ $ sudo hostnamectl set-hostname back
 ```
 
 ```
-$ sudo reboot
+$ sudo rebbot
 ```
 
 ### Front config <a name="front"></a>
@@ -98,7 +98,41 @@ $ apt install nodejs npm
 $ git clone https://github.com/mherreral/Lab2-tet.git
 ```
 
-- go to backend folder
+- go to backend folder and edit the database connection in file config/db.js
+- For obtaining this, you have to go to Atlas MongoDB page and do the following
+<p align="center"><img src="https://drive.google.com/uc?export=view&id=131wX0QR3fdt1s0KKzyrIqiBXMoaE9qa9"></p>
+
+### Generating certs <a name="ssl"></a>
+- go to freenom and generate a new domain, in dns, associate the domain to your elastic ip
+- In front instance, download certbot (same steps as dk_wordpress)
+- Generate certs with the following command
+
+```
+certbot certonly   --manual   --preferred-challenges dns -d tet-bookstore.tk -d "*.tet-bookstore.tk" -i nginx --register-unsafely-without-email
+```
+
+It will ask for modifying some dns records, you can do this from Freenom dns management console.
+
+### Docker config <a name="dc"></a>
+
+#### Front config
+In this configuration you will use the files located in *Lab2-tet/bookStore/front*, tet-bookstore.tk tells the server specifications to nginx and docker-compose.yml generates the container
+
+Here we run 
+
+```
+docker-compose up -d
+```
 
 
+#### Back config
+In this configuration you will use the files located in *Lab2-tet/bookStore/back*, Dockerfile generates the container
 
+Here we run 
+
+```
+sudo docker build -t back2 . && sudo docker run -dit --name tet -p 5000:5000 back2
+```
+
+After that, we can see our page working
+<p align="center"><img src="https://drive.google.com/uc?export=view&id=1V5xnziSrFLsnBZh93RzPaq6bqTSJkyyu"></p>
